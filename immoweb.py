@@ -23,9 +23,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
 
 # settings
-url = 'https://www.immoweb.be/fr/recherche/maison/a-louer?countries=BE&maxPrice=1500&minPrice=1000&postalCodes=1300%2C1301%2C1330%2C1340%2C1342%2C1348&orderBy=newest'
+new_house_url = 'https://www.immoweb.be/fr/annonce/maison/a-louer'  # base URL (either renting or buying mode)
+url = 'https://www.immoweb.be/fr/recherche/maison/a-louer?countries=BE'  # add your exact search URL here
 maxpages = 2
-destinators = ['corentinvdk@gmail.com', 'corentinvdk@hotmail.com'] # sending to
+destinators = ['XXX@gmail.com'] # sending to
 smtp_host = os.environ.get('MAIL_SERVER')
 smtp_port = os.environ.get('MAIL_PORT')
 #smtp_mail = 'notarealemail@gmail.com'
@@ -42,8 +43,6 @@ messages = [
     "Il pleut des maisons! Une nouvelle vient d'arriver ici: ",
 ]
 
-# new_house_url
-new_hourse_url = 'https://www.immoweb.be/fr/annonce/maison/a-louer'
 
 # prep
 while(True):
@@ -81,7 +80,7 @@ while(True):
                 db.commit()
                 if not firstRun:
                     print('Sending mail about new property ID {}.'.format(immoweb_id))
-                    immoweb_url = f"{new_hourse_url}/{location}/{postal_code}/{immoweb_id}"
+                    immoweb_url = f"{new_house_url}/{location}/{postal_code}/{immoweb_id}"
                     random_message = random.choice(messages)
                     email = MIMEText(random_message + immoweb_url)
                     email['Subject'] = 'Nouvelle maison immoweb: {}'.format(immoweb_id)

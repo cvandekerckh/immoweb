@@ -10,6 +10,8 @@ selenium = "*"
 beautifulsoup4 = "*"
 requests = "*"
 python-dotenv = "*"
+playwright = "*"
+openai = "*"
 
 [requires]
 python_version = "3.7"
